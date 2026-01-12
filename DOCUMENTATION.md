@@ -1,4 +1,4 @@
-## Task 1
+## Task 1  – Basic CI/CD Using GitHub Runners
 ### T1.1 Set up a CI workflow
 To create a CI workflow using GitHub Actions, we create a YAML file `ci_cd.yml` in the `.github/workflows/` directory.
 We give it a name with the `name` field.
@@ -52,6 +52,31 @@ Found release Patch: CI/CD Pipeline Fix (with id=276067205)
 Error: Resource not accessible by integration - https://docs.github.com/rest/releases/releases#update-a-release
 ```
 
-To fix this, I added a `permissions` field.`
+To fix this, I added a `permissions` field. Now everything works as expected.
 
-## Task 2
+
+## Task 2 – Reproducible Builds Using Docker
+### T2.1 Create a Dockerfile
+To create a Dockerfile that uses a multi-stage build, we start by defining the base image for the build stage.
+We use the `debian:bookworm` image as our base, and we name this stage `builder`. Then we install the necessary build tools using `apt-get`.
+
+We copy the entire project into the container and run `make` to build the project, followed by `make test` to run the tests.
+
+For the runtime stage, we use the `debian:bookworm-slim` image as our base.
+We copy only the compiled binary, and the license, from the build stage to the runtime stage.
+We create a non-root user named `dummyuser` to run the application.
+We switch to this user using the `USER` instruction.
+
+Finally, we define the command to run the application when the container starts using the `CMD` instruction.
+
+### T2.2 Verify build and test in Docker
+To verify the build and test in Docker, we run:
+```bash
+docker build .
+```
+This command builds the Docker image using the Dockerfile in the current directory.
+
+Everything worked as expected. But to be sure that the `make` command builds the latest version of the code,
+I added a `RUN make clean` command before the `RUN make` command in the Dockerfile.
+
+### T2.3 Integrate Docker into CI
