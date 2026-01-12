@@ -1,4 +1,8 @@
 name: ci_cd
+
+permissions:
+  contents: write
+
 on:
   # CI triggers on pushes and pull requests to the main branch
   push:

@@ -45,4 +45,13 @@ Error: Resource not accessible by integration - https://docs.github.com/rest/rel
 
 To fix this, I added a command that renames the binary to `dummydb` and changed the upload path.
 
+This still lead to an error:
+```
+Found release Patch: CI/CD Pipeline Fix (with id=276067205)
+⚠️ Unexpected error fetching GitHub release for tag refs/tags/v0.1.1: HttpError: Resource not accessible by integration - https://docs.github.com/rest/releases/releases#update-a-release
+Error: Resource not accessible by integration - https://docs.github.com/rest/releases/releases#update-a-release
+```
+
+To fix this, I added a `permissions` field.`
+
 ## Task 2
