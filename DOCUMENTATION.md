@@ -87,3 +87,19 @@ As before, we define the steps of the job under the `steps` field.
 - The second step builds the Docker image using the `docker build -t dummydb:test .` command.
 - The third step runs the Docker container using the `docker run --rm dummydb:test` command to ensure that the application works as expected within the container.
 
+When pushing these changes, the CI pipeline runs as expected.
+
+### T2.4 Publish artifacts on release
+To do this, we modify the existing `ci_cd.yml` file again.
+
+First of all, we need to add the permission to write packages in the `permissions` field.
+
+Then, we add a new step in the `deploy` job to log in to GitHub Container Registry (GHCR) using the `docker/login-action@v3` action.
+We specify the registry URL, username, and password (using the `GITHUB_TOKEN` secret) to authenticate.
+
+Next, we add another step to build, tag and push the Docker image to GHCR, using the `docker/build-push-action@v5` action.
+We specify the context, tags (including the version tag based on the release tag), and set `push` to `true` to push the image to the registry.
+
+To ensure that the Image name is valid and lowercase, we add a step that sets an environment variable `IMAGE_NAME` by converting the repository name to lowercase.
+
+

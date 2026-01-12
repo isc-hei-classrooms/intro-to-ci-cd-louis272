@@ -2,6 +2,7 @@ name: ci_cd
 
 permissions:
   contents: write
+  packages: write
 
 on:
   # CI triggers on pushes and pull requests to the main branch
@@ -68,3 +69,22 @@ jobs:
           files: |
             build/dummydb
             LICENSE
+
+      - name: Lowercase Image Name
+        run: echo "REPO_LOWER=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ env.REPO_LOWER }}/dummydb:latest
+            ghcr.io/${{ env.REPO_LOWER }}/dummydb:${{ github.ref_name }}
