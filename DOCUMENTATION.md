@@ -32,3 +32,17 @@ As before, we define the steps of the job under the `steps` field.
 - The second step builds the binary using `make`.
 - The third step uploads a release artifact using the `softprops/action-gh-release@v2` action, where we specify the files to be included in the release.
 
+When pushing the file, the CI/CD pipeline runs, and we can see the results in the "Actions" tab of the GitHub repository.
+
+I created a release `v0.1' to test the CD process, and this error occurred:
+```
+Run softprops/action-gh-release@v2
+🤔 Pattern 'dummydb' does not match any files.
+Found release Initial Release (with id=276062007)
+⚠️ Unexpected error fetching GitHub release for tag refs/tags/v0.1: HttpError: Resource not accessible by integration - https://docs.github.com/rest/releases/releases#update-a-release
+Error: Resource not accessible by integration - https://docs.github.com/rest/releases/releases#update-a-release
+```
+
+To fix this, I added a command that renames the binary to `dummydb` and changed the upload path.
+
+## Task 2

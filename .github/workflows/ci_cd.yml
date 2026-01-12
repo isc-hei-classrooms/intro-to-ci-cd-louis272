@@ -43,10 +43,11 @@ jobs:
         run: |
           make clean
           make release
+          mv build/main build/dummydb
 
       - name: Upload Release Artifact
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dummydb
+            build/dummydb
             LICENSE
