@@ -80,3 +80,10 @@ Everything worked as expected. But to be sure that the `make` command builds the
 I added a `RUN make clean` command before the `RUN make` command in the Dockerfile.
 
 ### T2.3 Integrate Docker into CI
+To integrate Docker into the CI workflow, we modify the existing `ci_cd.yml` file.
+We add a new job named `docker-build` under the `build-and-test` job.
+As before, we define the steps of the job under the `steps` field.
+- The first step checks out the repository.
+- The second step builds the Docker image using the `docker build -t dummydb:test .` command.
+- The third step runs the Docker container using the `docker run --rm dummydb:test` command to ensure that the application works as expected within the container.
+
