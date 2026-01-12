@@ -1,0 +1,52 @@
+name: ci_cd
+on:
+  # CI triggers on pushes and pull requests to the main branch
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+  # CD triggers on creation of a new release
+  release:
+    types: [created]
+
+jobs:
+  # Continuous Integration: Build and Test
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build DummyDB
+        run: make
+
+      - name: Run Tests
+        run: make test
+
+  # Continuous Deployment: Release
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: build-and-test
+
+    if: github.event_name == 'release'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build DummyDB Release Binary
+        run: |
+          make clean
+          make release
+
+      - name: Upload Release Artifact
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dummydb
+            LICENSE
