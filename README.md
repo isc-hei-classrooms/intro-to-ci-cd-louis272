@@ -65,4 +65,14 @@ make test
 
 ## CI/CD
 
-TO BE COMPLETED 
+### CI Trigger Conditions
+- Push to `main`
+- Pull request targeting `main`
+
+### CD Trigger Conditions
+- New release creation
+
+### Artifact naming and versioning
+- Binary: `dummydb`
+- Docker Image: `ghcr.io/isc-hei-classrooms/intro-to-ci-cd-louis272/dummydb:<version>`
+- Tags follow the format `v<major>.<minor>.<patch>` and if `<patch>` is zero, it is omitted.

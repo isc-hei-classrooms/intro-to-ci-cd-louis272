@@ -107,8 +107,8 @@ When pushing these changes and creating a new release, the CD pipeline runs as e
 ### T2.5 Pull the image on your local machine
 To pull the image on the local machine, we use the following command:
 ```bash
-docker pull ghcr.io/<your-username>/<your-repo-name>/dummydb:latest
-docker run --rm ghcr.io/<your-username>/<your-repo-name>/dummydb:latest
+docker pull ghcr.io/isc-hei-classrooms/intro-to-ci-cd-louis272/dummydb:latest
+docker run --rm ghcr.io/isc-hei-classrooms/intro-to-ci-cd-louis272/dummydb:latest
 ```
 
 ## Experimentations
