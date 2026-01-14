@@ -4,7 +4,7 @@
 
 int main() {
   // Create a database capable of storing at most 4 tables.
-  ddb::DummyDB db{4};
+  ddb::DummyDB db{4}
 
   // Create a table whose records are pairs of floating-point numbers and
   // assign the identity of that table to the local variable `t0`. The primary

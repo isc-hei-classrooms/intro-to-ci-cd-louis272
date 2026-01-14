@@ -102,4 +102,15 @@ We specify the context, tags (including the version tag based on the release tag
 
 To ensure that the Image name is valid and lowercase, we add a step that sets an environment variable `IMAGE_NAME` by converting the repository name to lowercase.
 
+When pushing these changes and creating a new release, the CD pipeline runs as expected.
 
+### T2.5 Pull the image on your local machine
+To pull the image on the local machine, we use the following command:
+```bash
+docker pull ghcr.io/<your-username>/<your-repo-name>/dummydb:latest
+docker run --rm ghcr.io/<your-username>/<your-repo-name>/dummydb:latest
+```
+
+## Experimentations
+### A commit that breaks CI and causes it to fail.
+Removed the semicolon at the end of the line `ddb::DummyDB db{4}`
