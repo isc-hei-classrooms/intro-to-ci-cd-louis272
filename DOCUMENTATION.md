@@ -114,3 +114,6 @@ docker run --rm ghcr.io/<your-username>/<your-repo-name>/dummydb:latest
 ## Experimentations
 ### A commit that breaks CI and causes it to fail.
 Removed the semicolon at the end of the line `ddb::DummyDB db{4}`
+
+### A fix that restores CI.
+Added back the semicolon at the end of the line `ddb::DummyDB db{4};`
