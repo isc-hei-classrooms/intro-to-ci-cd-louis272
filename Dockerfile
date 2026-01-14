@@ -17,7 +17,7 @@ RUN make
 
 # Run tests during the build
 # If this fails, the 'docker build' command will stop immediately.
-RUN make tset
+RUN make test
 
 # Runtime stage
 FROM debian:bookworm-slim
