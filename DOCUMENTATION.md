@@ -117,3 +117,6 @@ Removed the semicolon at the end of the line `ddb::DummyDB db{4}`
 
 ### A fix that restores CI.
 Added back the semicolon at the end of the line `ddb::DummyDB db{4};`
+
+### A Docker build failure due to a bug in the codebase or Dockerfile.
+Added a typo in the `RUN make test` command in the Dockerfile, changing it to `RUN make tset`
