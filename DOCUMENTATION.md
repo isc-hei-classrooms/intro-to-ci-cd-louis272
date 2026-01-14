@@ -123,3 +123,6 @@ Added a typo in the `RUN make test` command in the Dockerfile, changing it to `R
 
 ### The change that fixes the Docker build.
 Corrected the typo in the Dockerfile, changing `RUN make tset` back to `RUN make test`
+
+### A successful release producing all artifacts.
+Created a new release `v0.2` in the GitHub repository, which triggered the CD pipeline and produced all artifacts as expected.
